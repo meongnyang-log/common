@@ -2,11 +2,12 @@ plugins {
     kotlin("jvm") version "1.9.25"
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
+    kotlin("plugin.spring") version "1.9.25"
     id("maven-publish")
 }
 
 group = "com.back"
-version = "1.0.6"
+version = "1.0.7"
 
 repositories {
     mavenCentral()
