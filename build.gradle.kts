@@ -4,10 +4,11 @@ plugins {
 }
 
 group = "com.back"
-version = "1.0.3"
+version = "1.0.4"
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://repo.spring.io/milestone") }
 }
 
 dependencies {
