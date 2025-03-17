@@ -7,14 +7,14 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 @EnableConfigurationProperties(JwtProperties::class)
-open class AuthConfig {
+class AuthConfig {
     @Bean
-    open fun jwtTokenProvider(jwtProperties: JwtProperties): JwtTokenProvider {
+    fun jwtTokenProvider(jwtProperties: JwtProperties): JwtTokenProvider {
         return JwtTokenProvider(jwtProperties)
     }
 
     @Bean
-    open fun customUserDetailsService(userRepository: UserRepository): CustomUserDetailsService {
+    fun customUserDetailsService(userRepository: UserRepository): CustomUserDetailsService {
         return CustomUserDetailsService(userRepository)
     }
 }
