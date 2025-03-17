@@ -1,5 +1,6 @@
-package auth.config
+package auth
 
+import auth.config.AuthProperties
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.context.properties.EnableConfigurationProperties
