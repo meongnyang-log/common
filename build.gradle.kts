@@ -6,12 +6,14 @@ plugins {
 }
 
 group = "com.back"
-version = "1.0.5"
+version = "1.0.6"
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://repo.spring.io/milestone") }
 }
+
+tasks.bootJar { enabled = false }
+tasks.jar { enabled = true }
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
