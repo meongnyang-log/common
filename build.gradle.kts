@@ -13,7 +13,7 @@ plugins {
 val queryDslVersion = "5.1.0"
 
 group = "com.back"
-version = "1.0.35"
+version = "1.0.36"
 
 repositories {
     mavenCentral()
