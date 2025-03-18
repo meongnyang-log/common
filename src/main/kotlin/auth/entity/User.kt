@@ -23,6 +23,7 @@ class User(
     val userPassword: String,
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     val userRole: UserRole = UserRole.USER,
 
     @Enumerated(EnumType.STRING)
