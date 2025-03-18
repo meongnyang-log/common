@@ -13,7 +13,7 @@ plugins {
 val queryDslVersion = "5.1.0"
 
 group = "com.back"
-version = "1.0.36"
+version = "1.0.37"
 
 repositories {
     mavenCentral()
@@ -62,12 +62,10 @@ tasks.withType<JavaCompile> {
 tasks.test {
     useJUnitPlatform()
 }
+/**
+ * @Entity, @MappedSuperclass, @Embeddable 가 붙은 클래스들은 자동으로 open 키워드가 적용되어 JPA에서 사용할 수 있게 됨.
+ * */
 allOpen {
-    annotation("jakarta.persistence.Entity")
-    annotation("jakarta.persistence.MappedSuperclass")
-    annotation("jakarta.persistence.Embeddable")
-}
-noArg {
     annotation("jakarta.persistence.Entity")
     annotation("jakarta.persistence.MappedSuperclass")
     annotation("jakarta.persistence.Embeddable")
