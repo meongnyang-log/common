@@ -2,7 +2,7 @@ package config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
-@ConfigurationProperties("auth.jwt")
+@ConfigurationProperties("jwt")
 data class JwtProperties(
     var secretKey: String,
     var accessTokenExpiration: Long,
