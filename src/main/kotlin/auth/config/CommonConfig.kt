@@ -23,12 +23,12 @@ class CommonConfig {
         return CustomUserDetailsService(userRepository)
     }
 
-    @Bean
-    fun jwtTokenProvider(authProperties: AuthProperties): JwtTokenProvider {
-        return JwtTokenProvider(JwtProperties(
-            secretKey = authProperties.jwt.secretKey,
-            accessTokenExpiration = authProperties.jwt.accessTokenExpiration,
-            refreshTokenExpiration = authProperties.jwt.refreshTokenExpiration
-        ))
-    }
+//    @Bean
+//    fun jwtTokenProvider(authProperties: AuthProperties): JwtTokenProvider {
+//        return JwtTokenProvider(JwtProperties(
+//            secretKey = authProperties.jwt.secretKey,
+//            accessTokenExpiration = authProperties.jwt.accessTokenExpiration,
+//            refreshTokenExpiration = authProperties.jwt.refreshTokenExpiration
+//        ))
+//    }
 }
