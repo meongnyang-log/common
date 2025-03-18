@@ -1,16 +1,17 @@
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.4.3"
+    kotlin("kapt") version "1.9.25"
+    kotlin("plugin.jpa") version "1.9.25"
+    id("org.springframework.boot") version "3.2.3"
     id("io.spring.dependency-management") version "1.1.7"
     id("maven-publish")
-    kotlin("kapt") version "1.9.25"
 }
 
 val queryDslVersion = "5.1.0"
 
 group = "com.back"
-version = "1.0.15"
+version = "1.0.16"
 
 repositories {
     mavenCentral()
