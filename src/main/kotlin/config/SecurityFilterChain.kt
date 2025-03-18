@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 abstract class AbstractSecurityConfig {
     @Bean
-    open fun filterChain(http: HttpSecurity): SecurityFilterChain {
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
         val jwtFilter = JwtAuthenticationFilter(jwtTokenProvider(), customUserDetailsService())
 
         http

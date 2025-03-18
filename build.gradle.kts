@@ -4,19 +4,34 @@ plugins {
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
     id("maven-publish")
+    kotlin("kapt") version "1.9.25"
 }
 
+val queryDslVersion = "5.1.0"
+
 group = "com.back"
-version = "1.0.14"
+version = "1.0.15"
 
 repositories {
     mavenCentral()
 }
 
 tasks.bootJar { enabled = false }
-tasks.jar { enabled = true }
+tasks.jar {
+    enabled = true
+    dependsOn("kapt")
+
+    // QClass 파일들을 jar에 포함
+    from(sourceSets.main.get().output)
+    from(file("build/generated/source/kapt/main"))
+}
 
 dependencies {
+    api("com.querydsl:querydsl-jpa:$queryDslVersion:jakarta")
+    api("com.querydsl:querydsl-kotlin:$queryDslVersion")
+    kapt("com.querydsl:querydsl-apt:$queryDslVersion:jakarta")
+    kapt("jakarta.persistence:jakarta.persistence-api")
+
     api("org.springframework.boot:spring-boot-starter-web")
     api("org.springframework.boot:spring-boot-starter-validation")
     api("org.springframework.boot:spring-boot-starter-security")
