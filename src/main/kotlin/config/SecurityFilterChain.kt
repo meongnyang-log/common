@@ -1,27 +1,18 @@
 package config
 
-import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
-
 @Configuration
-@EnableWebSecurity
-@EnableConfigurationProperties(JwtProperties::class)
-class SecurityConfig(
-    private val jwtTokenProvider: JwtTokenProvider,
-    private val userDetailsService: CustomUserDetailsService
-) {
-
-
+abstract class AbstractSecurityConfig {
     @Bean
     open fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        val jwtFilter = JwtAuthenticationFilter(jwtTokenProvider, userDetailsService)
+        val jwtFilter = JwtAuthenticationFilter(jwtTokenProvider(), customUserDetailsService())
 
         http
             .csrf { csrf -> csrf.disable() }
@@ -29,14 +20,7 @@ class SecurityConfig(
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .authorizeHttpRequests { auth ->
-                auth
-                    .requestMatchers(
-                        "/api/auth/**",
-                        "/test/hello",
-                        "/api/**"
-                    ).permitAll() // 인증 없이 접근 가능
-                    .requestMatchers("/admin/**").hasRole("ADMIN") // admin 만
-                    .anyRequest().authenticated() // 그 외는 인증 필요
+                configure(auth)
             }
             .addFilterBefore(
                 jwtFilter,
@@ -44,6 +28,12 @@ class SecurityConfig(
             )
 
         return http.build()
-
     }
+
+    // 타입 수정
+    protected abstract fun configure(auth: AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry)
+
+    protected abstract fun jwtTokenProvider(): JwtTokenProvider
+
+    protected abstract fun customUserDetailsService(): CustomUserDetailsService
 }
