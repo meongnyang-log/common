@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import config.CustomUserDetailsService
-import config.JwtProperties
-import config.JwtTokenProvider
 import auth.repository.UserRepository
 
 @AutoConfiguration

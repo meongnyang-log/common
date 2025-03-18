@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.back"
-version = "1.0.13"
+version = "1.0.14"
 
 repositories {
     mavenCentral()
@@ -17,16 +17,15 @@ tasks.bootJar { enabled = false }
 tasks.jar { enabled = true }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    api("org.springframework.boot:spring-boot-starter-web")
+    api("org.springframework.boot:spring-boot-starter-validation")
+    api("org.springframework.boot:spring-boot-starter-security")
+    api("org.springframework.boot:spring-boot-starter-data-jpa")
 
     // JWT
-    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
-    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+    api("io.jsonwebtoken:jjwt-api:0.11.5")
+    api("io.jsonwebtoken:jjwt-impl:0.11.5")
+    api("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
     testImplementation("org.springframework.security:spring-security-test")
 
