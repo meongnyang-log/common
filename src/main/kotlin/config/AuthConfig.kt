@@ -1,21 +1,16 @@
 package config
 
-import auth.config.AuthProperties
 import auth.repository.UserRepository
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
+@EnableConfigurationProperties(JwtProperties::class)
 class AuthConfig {
     @Bean
-    fun jwtTokenProvider(authProperties: AuthProperties): JwtTokenProvider {
-        return JwtTokenProvider(
-            JwtProperties(
-                secretKey = authProperties.jwt.secretKey,
-                accessTokenExpiration = authProperties.jwt.accessTokenExpiration,
-                refreshTokenExpiration = authProperties.jwt.refreshTokenExpiration
-            )
-        )
+    fun jwtTokenProvider(jwtProperties: JwtProperties): JwtTokenProvider {
+        return JwtTokenProvider(jwtProperties)
     }
 
     @Bean
