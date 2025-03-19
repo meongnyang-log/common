@@ -7,6 +7,7 @@ plugins {
     kotlin("plugin.noarg") version "1.9.25"
     id("org.springframework.boot") version "3.2.3"
     id("io.spring.dependency-management") version "1.1.7"
+    // 라이브러리 배포할 때 사용
     id("maven-publish")
 }
 
@@ -19,8 +20,9 @@ repositories {
     mavenCentral()
 }
 
+
 kotlin.sourceSets.main {
-    kotlin.srcDir("$buildDir/generated/source/kapt/main")
+    kotlin.srcDir("$buildDir/generated/source/kapt/main") // Q클래스를 소스 경로에 포함
 }
 
 tasks.bootJar { enabled = false }
@@ -34,9 +36,18 @@ tasks.jar {
 }
 
 dependencies {
+    /**
+     * api = 외부 공개용
+     *
+     * implementation(), 컴파일 시, 런타임 시 필요하다
+     * kapt(), 컴파일 시에만 필요하다
+     * */
     api("com.querydsl:querydsl-jpa:$queryDslVersion:jakarta")
     api("com.querydsl:querydsl-kotlin:$queryDslVersion")
     kapt("com.querydsl:querydsl-apt:$queryDslVersion:jakarta")
+    /**
+     * QueryDSL 이 @Entity 같은 어노테이션을 인식하고 Q클래스를 생성하는 데 필요한 API를 제공
+     * */
     kapt("jakarta.persistence:jakarta.persistence-api")
 
     api("org.springframework.boot:spring-boot-starter-web")
@@ -55,6 +66,11 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+/**
+ * QueryDSL 사용을 위한 설정
+ * kapt에서 생성된 Q클래스를 JavaCompile 단계에서 처리할 때 querydsl-apt를 인식하도록 하여
+ * 컴파일 실패나 Q클래스 누락을 방지한다
+ * */
 tasks.withType<JavaCompile> {
     options.annotationProcessorPath = configurations.kapt.get()
 }
@@ -75,6 +91,9 @@ kotlin {
     jvmToolchain(21)
 }
 
+/**
+ * Maven 아티팩트를 생성하여 GitHub Packages에 배포하는 설정
+ * */
 publishing {
     publications {
         create("auth", MavenPublication::class) {
