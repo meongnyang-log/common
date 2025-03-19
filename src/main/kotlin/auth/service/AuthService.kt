@@ -175,7 +175,6 @@ class AuthService(
             userEmail = email,
             userPassword = "",
             provider = provider,
-            isAgreed = false,
         )
 
         return userRepository.save(user)

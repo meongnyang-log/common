@@ -30,7 +30,6 @@ class User(
     @Column(nullable = false, length = 10)
     val provider: AuthProvider,
 
-    val isAgreed: Boolean,
 
     @CreatedDate
     @Column(updatable = false)
@@ -44,7 +43,6 @@ class User(
         userPassword = "",
         userRole = UserRole.USER,
         provider = AuthProvider.LOCAL,
-        isAgreed = false,
     ) {
 
     }
