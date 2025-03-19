@@ -174,7 +174,8 @@ class AuthService(
         val user = User(
             userEmail = email,
             userPassword = "",
-            provider = provider
+            provider = provider,
+            isAgreed = false,
         )
 
         return userRepository.save(user)
